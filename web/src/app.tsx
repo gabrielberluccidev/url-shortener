@@ -33,6 +33,8 @@ export const App = () => {
   const [sooner, setSooner] = useState<boolean>(false);
   const [longUrl, setLongUrl] = useState('');
 
+  console.log(shortUrl);
+
   const generateUrl = async () => {
     try {
       const res = await axios.post(
@@ -41,7 +43,7 @@ export const App = () => {
           longUrl: longUrl,
         },
       );
-      setShortUrl(res.data.data.shortUrl);
+      setShortUrl(res.data.data.shortUrl.trim().replace(/['"]/g, ''));
     } catch (error) {
       console.error(error);
     }
@@ -63,10 +65,6 @@ export const App = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLongUrl(e.target.value);
-  };
-
-  const mountUrl = (url: string) => {
-    return `http://${url}`;
   };
 
   const navigationData = [
@@ -139,7 +137,7 @@ export const App = () => {
                 <CardFooter className="bg-accent p-4 flex justify-between">
                   <div className="flex gap-2 items-center">
                     <CircleCheck className="text-emerald-500" />
-                    <a className="text-blue-600" href={mountUrl(shortUrl)}>
+                    <a className="text-blue-600" href={shortUrl}>
                       {shortUrl}
                     </a>
                   </div>
