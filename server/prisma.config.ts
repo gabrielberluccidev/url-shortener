@@ -1,10 +1,12 @@
 import 'dotenv/config';
+import { defineConfig, env } from 'prisma/config';
 
-export default {
+export default defineConfig({
   schema: 'prisma/schema.prisma',
   migrations: {
     path: 'prisma/migrations',
   },
-  // The datasource URL is typically picked up from the .env file automatically
-  // by the Prisma CLI using the provider defined in schema.prisma
-};
+  datasource: {
+    url: env('DATABASE_URL'),
+  },
+});
