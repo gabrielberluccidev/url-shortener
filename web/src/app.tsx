@@ -26,15 +26,27 @@ import { Separator } from '@/components/ui/separator';
 import { useState } from 'react';
 import { Toaster } from '@/components/ui/sonner';
 import { toast } from 'sonner';
+import axios from 'axios';
 
 export const App = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [url, setUrl] = useState('');
+  const [shortUrl, setShortUrl] = useState('');
   const [sooner, setSooner] = useState<boolean>(false);
+  const [longUrl, setLongUrl] = useState('');
+
+  const generateUrl = async () => {
+    try {
+      const res = await axios.post('http://localhost:3000/api/url', {
+        longUrl: longUrl,
+      });
+      setShortUrl(res.data.data.shortUrl);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const copyToClipBoard = () => {
     try {
-      navigator.clipboard.writeText(url);
+      navigator.clipboard.writeText(shortUrl);
       setSooner(true);
       toast.success('URL copied to clipboard');
     } catch (error) {
@@ -44,6 +56,14 @@ export const App = () => {
       );
       console.log(error);
     }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLongUrl(e.target.value);
+  };
+
+  const mountUrl = (url: string) => {
+    return `http://${url}`;
   };
 
   const navigationData = [
@@ -65,6 +85,8 @@ export const App = () => {
     },
   ];
 
+  console.log(longUrl);
+
   return (
     <ThemeProvider>
       <Navbar navigationData={navigationData} />
@@ -82,13 +104,14 @@ export const App = () => {
                   <InputGroupInput
                     id="input-group-url"
                     placeholder="https://exemple.com/long-url"
+                    onChange={handleInputChange}
                   />
                   <InputGroupAddon>
                     <Link />
                   </InputGroupAddon>
                 </InputGroup>
 
-                <Button>
+                <Button onClick={generateUrl}>
                   Short
                   <ArrowRight />
                 </Button>
@@ -104,7 +127,7 @@ export const App = () => {
               successful
             
             */}
-            {url.length > 1 && (
+            {shortUrl.length > 1 && (
               <>
                 <CardContent>
                   <h3>Your shortened link</h3>
@@ -113,7 +136,9 @@ export const App = () => {
                 <CardFooter className="bg-accent p-4 flex justify-between">
                   <div className="flex gap-2 items-center">
                     <CircleCheck className="text-emerald-500" />
-                    <p>{url}</p>
+                    <a className="text-blue-600" href={mountUrl(shortUrl)}>
+                      {shortUrl}
+                    </a>
                   </div>
 
                   <div className="flex gap-2">
