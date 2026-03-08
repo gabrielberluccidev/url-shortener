@@ -1,6 +1,6 @@
 import express, { type Request, type Response } from 'express';
 import 'dotenv/config';
-import { prisma } from '@lib/';
+import { prisma } from '@lib/prisma';
 import cors from 'cors';
 import { nanoid } from 'nanoid';
 
