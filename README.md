@@ -1,6 +1,6 @@
 # 🔗 URL Shortener
 
-> A sleek and efficient URL shortener built to streamline links and showcase modern web development skills.
+> A sleek and efficient [URL shortener](https://url-shortener-eosin-ten.vercel.app/) built to streamline links and showcase modern web development skills.
 
 ![Project Screenshot]![alt text](image.png)
 
@@ -33,6 +33,12 @@ This web app is a simple yet powerful URL shortener, developed to improve and de
 - **Database:** PostgreSQL
 - **ORM:** Prisma
 - **Validation:** Zod
+
+### Deploy
+
+- **Back-end:** [Render](https://render.com/)
+- **Front-end:** [Vercel](https://vercel.com/)
+- **DB:** [Neon](https://neon.com/)
 
 ## 🚀 Getting Started
 
