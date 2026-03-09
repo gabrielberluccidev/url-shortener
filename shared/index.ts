@@ -10,9 +10,9 @@ export const urlSchema = z
         minimum: 5,
         origin: 'string',
         inclusive: true,
-        message: 'Please, insert a valid URL.',
+        message: 'Please, insert a URL to shorten.',
         input: ctx.value,
       });
     }
   })
-  .pipe(z.url().normalize());
+  .pipe(z.url('Please, insert a valid URL to shorten.').normalize());
