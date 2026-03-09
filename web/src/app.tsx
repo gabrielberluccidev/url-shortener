@@ -24,7 +24,7 @@ import {
   Loader2,
 } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Toaster } from '@/components/ui/sonner';
 import { toast } from 'sonner';
 import axios from 'axios';
