@@ -21,9 +21,10 @@ import {
   Copy,
   ExternalLink,
   Link,
+  Loader2,
 } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Toaster } from '@/components/ui/sonner';
 import { toast } from 'sonner';
 import axios from 'axios';
@@ -35,9 +36,11 @@ export const App = () => {
   const [shortUrl, setShortUrl] = useState<string>('');
   const [longUrl, setLongUrl] = useState<string>('');
   const [invalid, setInvalid] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   const generateUrl = async () => {
     try {
+      setDisabled(true);
       urlSchema.parse(longUrl);
 
       const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/url`, {
@@ -53,6 +56,8 @@ export const App = () => {
         setInvalid(true);
         toast.error(currentErrorMessage);
       }
+    } finally {
+      setDisabled(false);
     }
   };
 
@@ -117,9 +122,18 @@ export const App = () => {
                   </InputGroupAddon>
                 </InputGroup>
 
-                <Button onClick={generateUrl}>
-                  Short
-                  <ArrowRight />
+                <Button disabled={disabled} onClick={generateUrl}>
+                  {disabled ? (
+                    <>
+                      Shortening
+                      <Loader2 />
+                    </>
+                  ) : (
+                    <>
+                      Short
+                      <ArrowRight />
+                    </>
+                  )}
                 </Button>
               </Field>
             </CardHeader>
