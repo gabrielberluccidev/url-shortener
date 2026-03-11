@@ -37,12 +37,12 @@ export const App = () => {
   const [longUrl, setLongUrl] = useState<string>('');
   const [invalid, setInvalid] = useState(false);
   const [disabled, setDisabled] = useState(false);
-  const [isWakingUp, setIswakingUp] = useState(false);
+  const [isWakingUp, setIsWakingUp] = useState(false);
 
   const generateUrl = async () => {
-    setTimeout(() => {
-      setIswakingUp(true);
-    }, 4000);
+    const timeoutId = setTimeout(() => {
+      setIsWakingUp(true);
+    }, 3000);
 
     try {
       setDisabled(true);
@@ -62,8 +62,9 @@ export const App = () => {
         toast.error(currentErrorMessage);
       }
     } finally {
+      clearTimeout(timeoutId);
       setDisabled(false);
-      setIswakingUp(false);
+      setIsWakingUp(false);
     }
   };
 
