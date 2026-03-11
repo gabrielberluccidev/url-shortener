@@ -2,7 +2,7 @@ import { prisma } from '@lib/prisma.js';
 import { urlSchema } from '@shared/index.js';
 import { type NextFunction, type Request, type Response } from 'express';
 import { nanoid } from 'nanoid';
-import { AppError } from 'src/error/Apperror.js';
+import { AppError } from '@error/AppError.js';
 
 export const createShortUrl = async (
   req: Request,
