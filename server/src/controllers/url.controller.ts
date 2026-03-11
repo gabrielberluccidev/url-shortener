@@ -10,7 +10,7 @@ export const createShortUrl = async (
   next: NextFunction,
 ) => {
   try {
-    const { originalUrl } = req.body['longUrl'];
+    const originalUrl = req.body['longUrl'];
 
     urlSchema.parse(originalUrl);
     const shortUrl = `${process.env.BASE_URL}/${nanoid(8)}`;
