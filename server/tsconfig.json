@@ -45,7 +45,8 @@
     "baseUrl": "./",
     "paths": {
       "@lib/*": ["./lib/*"],
-      "@shared/*": ["../shared/*"]
+      "@shared/*": ["../shared/*"],
+      "@error/*": ["../server/src/error/*"]
     }
   },
   "include": ["src/**/*", "../shared/**/*"]
