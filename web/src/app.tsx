@@ -1,5 +1,4 @@
 import { ThemeProvider } from '@/components/theme-provider';
-import Navbar from '@/components/ui/navbar';
 import {
   Card,
   CardContent,
@@ -35,9 +34,9 @@ import { urlSchema } from '@shared/zod-schemas';
 export const App = () => {
   const [shortUrl, setShortUrl] = useState<string>('');
   const [longUrl, setLongUrl] = useState<string>('');
-  const [invalid, setInvalid] = useState(false);
-  const [disabled, setDisabled] = useState(false);
-  const [isWakingUp, setIsWakingUp] = useState(false);
+  const [invalid, setInvalid] = useState<boolean>(false);
+  const [disabled, setDisabled] = useState<boolean>(false);
+  const [isWakingUp, setIsWakingUp] = useState<boolean>(false);
 
   const generateUrl = async () => {
     const timeoutId = setTimeout(() => {
@@ -89,22 +88,9 @@ export const App = () => {
     window.open(shortUrl, '_blank');
   };
 
-  const navigationData = [
-    {
-      title: 'Login',
-      href: '#',
-    },
-    {
-      title: 'Sign Up',
-      href: '#',
-    },
-  ];
-
   return (
     <ThemeProvider>
-      <Navbar navigationData={navigationData} />
-
-      <main className="flex justify-center mt-20">
+      <main className="flex justify-center items-center h-dvh">
         <div className="w-200 p-8">
           <Card className="p-8">
             <CardHeader>
